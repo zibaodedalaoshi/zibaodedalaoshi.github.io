@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="https://zibaodedalaoshi.github.io">
   <title>python洗牌 | 自爆的大老师的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##背景 ##内容 ##参考文献">
+  <meta name="description" content="##背景  在字节跳动测开一面面试的时候被问到了这道算法题，当时我想的是用0到53这54个数字组成列表来模拟整套牌，  用random.randint方法从里面取出一个元素pop出来到另一个列表，直到初始列表为空；  但实际上这个方法是不对的，因为洗牌过程中每一个元素出现在某一位置的概率是不一样的，这不符合要求  这道题没写好再加上前面的一些基础知识答得也不是很好，于是一面就挂了。。。 ##实现方">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python洗牌">
 <meta property="og:url" content="https://zibaodedalaoshi.github.io/2019/07/27/python洗牌/index.html">
 <meta property="og:site_name" content="自爆的大老师的博客">
-<meta property="og:description" content="##背景 ##内容 ##参考文献">
+<meta property="og:description" content="##背景  在字节跳动测开一面面试的时候被问到了这道算法题，当时我想的是用0到53这54个数字组成列表来模拟整套牌，  用random.randint方法从里面取出一个元素pop出来到另一个列表，直到初始列表为空；  但实际上这个方法是不对的，因为洗牌过程中每一个元素出现在某一位置的概率是不一样的，这不符合要求  这道题没写好再加上前面的一些基础知识答得也不是很好，于是一面就挂了。。。 ##实现方">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-27T01:18:50.569Z">
+<meta property="og:updated_time" content="2019-07-27T05:15:21.426Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python洗牌">
-<meta name="twitter:description" content="##背景 ##内容 ##参考文献">
+<meta name="twitter:description" content="##背景  在字节跳动测开一面面试的时候被问到了这道算法题，当时我想的是用0到53这54个数字组成列表来模拟整套牌，  用random.randint方法从里面取出一个元素pop出来到另一个列表，直到初始列表为空；  但实际上这个方法是不对的，因为洗牌过程中每一个元素出现在某一位置的概率是不一样的，这不符合要求  这道题没写好再加上前面的一些基础知识答得也不是很好，于是一面就挂了。。。 ##实现方">
   
     <link rel="alternative" href="/atom.xml" title="自爆的大老师的博客" type="application/atom+xml">
   
@@ -174,10 +174,27 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##背景</p>
-<p>##内容</p>
-<p>##参考文献</p>
+        <p>##背景<br>  在字节跳动测开一面面试的时候被问到了这道算法题，当时我想的是用0到53这54个数字组成列表来模拟整套牌，<br>  用random.randint方法从里面取出一个元素pop出来到另一个列表，直到初始列表为空；<br>  但实际上这个方法是不对的，因为洗牌过程中每一个元素出现在某一位置的概率是不一样的，这不符合要求<br>  这道题没写好再加上前面的一些基础知识答得也不是很好，于是一面就挂了。。。</p>
+<p>##实现方法<br>  ①其实直接用random.shuffle()就能实现<br>    但面试中我要敢这么说估计要被直接拉黑</p>
+<p>  ②我在网上看到有一种交换的方法还可以，也是用0到53这54个数字组成列表来模拟整套牌，<br>   从0开始遍历，每一个元素与随机一个其他元素交换位置，直到遍历结束（也可以自己和自己换），<br>   这就很有洗牌的感觉，感觉上就好很多</p>
+<p>##具体代码</p>
+<pre><code>
 
+import random
+
+def shuffle(args):
+    for i in range(0,len(args)):
+        temp = random.randint(0,53)
+        args[i],args[temp]  = args[temp],args[i]
+
+if __name__ == '__main__':
+    lst = []
+    for i in range(54):
+        lst.append(i)
+    shuffle(lst)
+    print(lst)
+
+</code></pre>
       
 
       
