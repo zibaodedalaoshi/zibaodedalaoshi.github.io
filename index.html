@@ -155,6 +155,111 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-陌陌一面总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/31/陌陌一面总结/">陌陌一面总结</a>
+    </h1>
+  
+
+        
+        <a href="/2019/07/31/陌陌一面总结/" class="archive-article-date">
+  	<time datetime="2019-07-31T08:02:13.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-31</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##前言<br>    抱着试一试的心态报了陌陌的‘Python开发师’岗位，本来以为会问项目的，结果又是把基础全问了一遍，包括一上来就问了个我不知道的安全层协议，<br>    全程下来基本没有一道题是回答完的，全都是回答了一半，估计是没了，先在这里做下记录，当做警示。</p>
+<p>##问题</p>
+<p>1.SSL/TLS握手过程<br>（我直接说的不会，因为真的没听过。。）<br>在这里放一张网上找的图，学习了：<br><img src="//zibaodedalaoshi.github.io/2019/07/31/陌陌一面总结/TLS.png" alt="TLS握手过程"></p>
+<p>2.TCP握手<br>（他看我不会TLS就转过来问了TCP的握手，我前面的说的对，但SYN和ACK的序号记不太清了，就按连接完之后的发送数据的序号说的。。）<br><img src="//zibaodedalaoshi.github.io/2019/07/31/陌陌一面总结/TCP.png" alt="TCP握手过程"></p>
+<p>3.进程间通信方式<br>（这个我倒是把5种方式都说出来了，但他问我管道具体是怎么发数据的，我真的忘了，上次用管道还是一年多以前了。。）<br> ①5种进程间通信方式：管道，FIFO,消息队列，信号量，共享内存<br> ②来自百度百科：<br> 管道通信（Communication Pipeline）即发送进程以字符流形式将大量数据送入管道，接收进程可从管道接收数据，二者利用管道进行通信。</p>
+<p>4.数据库事务的ACID<br>（ACID是说出来了，但就是忘了他问的一致性具体是啥。。瞎说说成了隔离性，卒）<br>原子性：事务里的操作要么都做，要么都不做<br>一致性：符合现实逻辑<br>隔离性：不同事务之间互不影响<br>持久性：事务执行完后不可逆且永久储存在系统中</p>
+<p>5.数据库的索引<br>（索引的好处和用处说出来了，但索引类型不是很懂，清楚地听到一声叹息。。）<br>**索引是快速搜索的关键，在数据库表中，对字段建立索引可以大大加快查询速度。<br>索引的类型：<br>（1）普通索引：没有任何限制<br>（2）唯一索引：索引列的值必须唯一，但允许有空值<br>（3）主键索引：不允许有空值，一般在建表时候就建立<br>（4）全文索引：快速定位某一数据<br>（5）B树索引，位图索引，反向锁索引</p>
+<p>6.快排的时间复杂度为什么是nlogn<br>在这里贴一下算法，我是真的背不下来：<br>        快速排序最优的情况就是每一次取到的元素都刚好平分整个数组；<br>        此时的时间复杂度公式则为：T[n] = 2T[n/2] + f(n)；T[n/2]为平分后的子数组的时间复杂度，f[n] 为平分这个数组时所花的时间；<br>        下面来推算下，在最优的情况下快速排序时间复杂度的计算(用迭代法)：<br>                                         T[n] =  2T[n/2] + n                                                                     —————-第一次递归<br>                 令：n = n/2        =  2 { 2 T[n/4] + (n/2) }  + n                                               —————-第二次递归</p>
+<pre><code>                             =  2^2 T[ n/ (2^2) ] + 2n
+
+ 令：n = n/(2^2)   =  2^2  {  2 T[n/ (2^3) ]  + n/(2^2)}  +  2n                         ----------------第三次递归  
+
+                             =  2^3 T[  n/ (2^3) ]  + 3n
+
+ ......................................................................................                        
+
+ 令：n = n/(  2^(m-1) )    =  2^m T[1]  + mn                                                  ----------------第m次递归(m次后结束)
+
+当最后平分的不能再平分时，也就是说把公式一直往下跌倒，到最后得到T[1]时，说明这个公式已经迭代完了（T[1]是常量了）。
+
+得到：T[n/ (2^m) ]  =  T[1]    ===&gt;&gt;   n = 2^m   ====&gt;&gt; m = logn；
+
+T[n] = 2^m T[1] + mn ；其中m = logn;
+
+T[n] = 2^(logn) T[1] + nlogn  =  n T[1] + nlogn  =  n + nlogn  ；其中n为元素个数
+
+又因为当n &gt;=  2时：nlogn  &gt;=  n  (也就是logn &gt; 1)，所以取后面的 nlogn；
+
+综上所述：快速排序最优的情况下时间复杂度为：O( nlogn )</code></pre><p>7.如何唯一地确定一条微博<br>我一开始说的是用ip+时间，不太对，因为IP有可能一样<br>后来说的是用用户id+时间，也不知道对不对</p>
+<p>8.两个升序数组组合<br>（我直接说的是复杂度为O（n^2）的插入排序，好像不是很满意）<br>另外也可以另加一个空的数组，往这个空的数组里加，用空间换时间</p>
+<p>9.python中可变与不可变？<br>我直接说的是列表和元组，于是当他问我为什么列表不可变的时候我就傻眼了，表情如下：<br><img src="//zibaodedalaoshi.github.io/2019/07/31/陌陌一面总结/timg.jpg" alt="？？？"><br>确实没有了解过，一直这用过来了，百度了一下，感觉比较靠谱的说法是：<br>    元组的不可变指定是元组的id不可变，就是指该元组对象的子对象id 不变<br>    但是如果子对象是可变对象，子对象里面的元素都是可以修改的<br>比如：</p>
+<pre><code>
+    a = ([1, 2, 3], (4, 5, 6))                                                      
+    print a                                                                         
+    a[0][0] = 99                                                                    
+    print a 
+#执行结果：
+    ([1, 2, 3], (4, 5, 6))
+    ([99, 2, 3], (4, 5, 6))
+</code></pre>
+
+<p>10.进程和线程，大概说了说，没啥</p>
+<p>##总结<br>    大概是一次比较尴尬的电话面试，面试官人很好，一直在给提示，但还是自己掌握的不牢靠，只能说上来个大概，稍微一往深了问就倒了<br>    以后学习的时候还是要把细节的东西好好看下，不能只能说个名称，连具体是啥都不知道<br>    秋招的第一次面试，当个警醒吧，还是要好好学习啊</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/07/31/陌陌一面总结/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -275,81 +380,6 @@ if __name__ == '__main__':
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/07/27/python洗牌/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/27/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2019/07/27/hello-world/" class="archive-article-date">
-  	<time datetime="2019-07-27T01:10:47.410Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-07-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/07/27/hello-world/">展开全文 >></a>
         </p>
       
 
