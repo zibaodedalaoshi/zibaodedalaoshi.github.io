@@ -155,6 +155,109 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-查找列表中所有子串“" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/19/查找列表中所有子串“/">查找列表中所有子串“</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/19/查找列表中所有子串“/" class="archive-article-date">
+  	<time datetime="2019-08-19T11:43:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>“””<br>一段自闭的经历，很简单的一道题，但笔试的时候就是想不出来，还是太菜了<br>小红书，拜拜<br>“””</p>
+<p>Summary<br>在这里总结三种方法吧，就当买个教训了</p>
+<p>①直接求子串的和</p>
+<pre><code>
+list1=[2,3,5]
+result=[]
+for i in list1:
+    length = len(result)
+    result.append(i)
+    for j in result[:length]:
+        result.append(i+j)
+print(result)
+</code></pre>
+<p>以[2,3,5]这个列表为例，先把第一个元素2添加到结果列表result中<br>从list1的第1位的元素3开始遍历，所需要做的就是把它和当前result中的所有元素相加，再追加到result中<br>即一开始result=[2]<br>然后是[2,3,5]<br>再然后是[2,3,5,5,7,8,10]<br>即可得出所有子集的和</p>
+<p>②python库<br>可以使用python中有的库itertools来进行实现<br>具体代码为：</p>
+<pre><code>
+import itertools
+list1 = ['a','a','a']
+list2 = []
+for i in range(1,len(list1)+1):
+    iter = itertools.combinations(list1,i)
+    list2.append(list(iter))
+
+print(list2)
+#输出结果为[[('a',), ('a',), ('a',)], [('a', 'a'), ('a', 'a'), ('a', 'a')], [('a', 'a', 'a')]]
+</code></pre>
+
+<p>③用位来进行运算<br>先贴代码：</p>
+<pre><code>
+list1 = [1,2,3,4]
+result=[]
+
+for i in range(2**len(list1)):
+    combo=[]
+    for j in range(len(list1)):
+        if (i>>j)%2:
+            combo.append(list1[j])
+    result.append(sum(combo))
+print(result)
+</code></pre>
+<p>从第一个直接算算出来后我们可以看到，n个数最后出来的结果集中元素的个数为2^n（包括0）<br>我们转化成位后一一的看一下：<br>[0]——-0000<br>[1]——-0001<br>[2]——-0010<br>[1,2]—–0011<br>[3]——-0100<br>[1,3]—–0101<br>[2,3]—–0110<br>[1,2,3]—0111<br>[4]——-1000<br>[1,4]—–1001<br>[2,4]—–1010<br>[1,2,4]—1011<br>[3,4]—–1100<br>[1,3,4]—1101<br>[2,3,4]—1110<br>[1,2,3,4]-1111<br>可以发现其实每一个子串都正好对应着它对应下标的二进制，<br>所以我们只需要对下标进行遍历，看下标的二进制中1对应的位置，再把相应的元素添加到临时列表中<br>再在最后把这个临时列表添加到大列表中即可</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/19/查找列表中所有子串“/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-陌陌一面总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
